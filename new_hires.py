@@ -15,9 +15,9 @@ load_dotenv()
 def new_hires(data):
 
     df = data[data['DEPARTMENT_TITLE'] == 'CITY ATTORNEY']
-    cols = ["RECORD_NBR", "JOB_CLASS_PGRADE", "PAY_YEAR", "GENDER", "ETHNICITY", "JOB_TITLE", "JOB_STATUS", "EMPLOYMENT_TYPE"]
+    cols = ['RECORD_NBR', 'JOB_CLASS_PGRADE', 'PAY_YEAR', 'GENDER', 'ETHNICITY', 'JOB_TITLE', 'JOB_STATUS', 'EMPLOYMENT_TYPE']
 
-    df2 = df.groupby(cols)["REGULAR_PAY"].sum().reset_index()
+    df2 = df.groupby(cols)['REGULAR_PAY'].sum().reset_index()
     df2['JOB_CLASS_PGRADE_NUMERIC'] = df2['JOB_CLASS_PGRADE'].rank(method='dense', ascending=True).astype(int)
     df2['JOB_CLASS_PGRADE_RANK'] = df2.groupby('RECORD_NBR')['JOB_CLASS_PGRADE_NUMERIC'].rank('dense').astype(int)
     df2['NEW_HIRE'] = df2.groupby('RECORD_NBR')['PAY_YEAR'].rank('dense').astype(int)
@@ -34,7 +34,7 @@ def new_hires(data):
     new_hires = df2[(df2['PAY_YEAR'] != 2013) & (df2['NEW_HIRE'] == 1)]
     # drop duplicates
     new_hires = new_hires.drop_duplicates(subset='RECORD_NBR', keep='first')
-    new_hires['PAY_YEAR'] = new_hires['PAY_YEAR'].apply(lambda x: f"{x}0101")
+    new_hires['PAY_YEAR'] = new_hires['PAY_YEAR'].apply(lambda x: f'{x}0101')
 
     bucket_name = os.getenv('GA_BUCKET')
     fname = 'new_hires.csv'

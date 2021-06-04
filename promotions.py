@@ -15,7 +15,7 @@ def promotions(data):
 
     df = data[data['DEPARTMENT_TITLE'] == 'CITY ATTORNEY']
 
-    cols = ["RECORD_NBR", "JOB_CLASS_PGRADE", "PAY_YEAR", "GENDER", "ETHNICITY", "JOB_TITLE", "JOB_STATUS", "EMPLOYMENT_TYPE"]
+    cols = ['RECORD_NBR', 'JOB_CLASS_PGRADE', 'PAY_YEAR', 'GENDER', 'ETHNICITY', 'JOB_TITLE', 'JOB_STATUS', 'EMPLOYMENT_TYPE']
 
     df2 = df.groupby(cols)["REGULAR_PAY"].sum().reset_index()
     df2['JOB_CLASS_PGRADE_NUMERIC'] = df2['JOB_CLASS_PGRADE'].rank(method='dense', ascending=True).astype(int)
@@ -32,7 +32,7 @@ def promotions(data):
     promotions['GROUPING_01'] = promotions['GROUPING_01'].str.strip()
     promotions['GROUPING_02'] = promotions['GROUPING_02'].str.strip()
 
-    promotions['PAY_YEAR'] = promotions['PAY_YEAR'].apply(lambda x: f"{x}0101")
+    promotions['PAY_YEAR'] = promotions['PAY_YEAR'].apply(lambda x: f'{x}0101')
 
     bucket_name = os.getenv('GA_BUCKET')
     fname = 'promotions.csv'
@@ -43,4 +43,5 @@ def promotions(data):
     blob = storage.Blob(ga_bucket_path, bucket)
     df_str = promotions.to_csv(index=False, encoding='utf-8')
     blob.upload_from_string(df_str)
+
     print("uploaded promotions.csv")
