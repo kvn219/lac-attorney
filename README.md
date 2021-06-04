@@ -23,3 +23,5 @@ make notebook
 # deactivate virtualenv
 deactivate
 ```
+
+Tested with `Python 3.9.1`.

@@ -38,7 +38,7 @@ def salaries(data):
     salaries = salaries.drop_duplicates()
 
     salaries['ETHNICITY'] = salaries['ETHNICITY'].str.strip().replace(ETHNICITY_MAPPING)
-    salaries['PAY_YEAR'] = salaries['PAY_YEAR'].apply(lambda x: f'{x}0101')
+    salaries['PAY_YEAR'] = salaries['PAY_YEAR'].apply(lambda x: f"{x}0101")
 
     bucket_name = os.getenv('GA_BUCKET')
     fname = 'salaries.csv'
