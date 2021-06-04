@@ -1,6 +1,6 @@
 # lac-attorney
 
-
+### Setting up
 ```
 # clone repo
 git clone https://github.com/kvn219/lac-attorney.git
@@ -19,4 +19,7 @@ pip install -r requirements.txt
 # setup docker
 make build
 make notebook
+
+# deactivate virtualenv
+deactivate
 ```
