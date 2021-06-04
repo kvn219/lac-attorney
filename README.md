@@ -1,36 +1,22 @@
 # lac-attorney
 
 
-### Setting up `.env`
-Create an `.env` file that includes a `GA_BUCKET` key.
-
 ```
-GA_BUCKET='YOUR_GOOGLE_CLOUD_BUCKET'
-```
+# clone repo
+git clone https://github.com/kvn219/lac-attorney.git
 
-### Running the job
+# move into the lac-attorney directory
+cd lac-attorney
 
-```
-python main.py
-```
+# create .env file
+echo GA_BUCKET='YOUR_GOOGLE_CLOUD_BUCKET'  > .env
 
-### Setting up virtualenv, Docker, and Make
-
-#### virtualenv
-```
+# setup virtualenv
 python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
-```
 
-#### Make
-
-Build python
-```
+# setup docker
 make build
-```
-
-Use notebook (if necessary)
-
-```
 make notebook
 ```
